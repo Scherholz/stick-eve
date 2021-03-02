@@ -14,6 +14,11 @@
 # They also could contain extremely sensitive data
 /StickEve/[Mm]emoryCaptures/
 
+/StickEve/StickEve_Data
+/StickEve/UnityCrashHandler64.exe
+/StickEve/UnityPlayer.dll
+/StickEve/StickEve.exe
+/StickEve/MonoBleedingEdge
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/StickEve/[Aa]ssets/**/*.meta
 
