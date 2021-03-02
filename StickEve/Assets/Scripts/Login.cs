@@ -28,23 +28,12 @@ public class Login : MonoBehaviour
       {
          Debug.Log("Connection open!");
          _lastReceivedMessage = "Connection open!";
-         //intentionalClose = false;
-         //GameMessage startRequest = new GameMessage("OnMessage", RequestStartOp);
-         //SendWebSocketMessage(JsonUtility.ToJson(startRequest));
       };
 
       _testWs.OnClose += (e) =>
       {
          Debug.Log("Connection closed!" + e);
          _lastReceivedMessage = "Connection closed";
-         // only do this if someone quit the game session, and not for a game ending event
-         /*if (!intentionalClose)
-         {
-            UnityMainThreadHelper.wkr.AddJob(() =>
-            {
-               _menu.Disconnected();
-            });
-         }*/
       };
 
       _testWs.OnMessage += (bytes) =>
@@ -52,7 +41,7 @@ public class Login : MonoBehaviour
          // Reading a plain text message
          string message = System.Text.Encoding.UTF8.GetString(bytes);
          Debug.Log("Received OnMessage! (" + bytes.Length + " bytes) " + message);
-         _lastReceivedMessage = message;
+         _lastReceivedMessage= message;
       };
 
       _testWs.OnError += (e) =>
@@ -85,6 +74,7 @@ public class Login : MonoBehaviour
       {
          Debug.Log("Sending Message");
          await _testWs.SendText(JsonUtility.ToJson(_testCommand));
+         Debug.Log("Message sent");
       }
    }
 
@@ -102,6 +92,9 @@ public class Login : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_textMeshPro.SetText(_lastReceivedMessage);
+      //#if !UNITY_WEBGL || UNITY_EDITOR
+      _websocket.DispatchMessageQueue();
+      //#endif
+      m_textMeshPro.SetText(_lastReceivedMessage);
     }
 }
