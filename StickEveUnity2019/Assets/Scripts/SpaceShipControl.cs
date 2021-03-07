@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SpaceShipControl : MonoBehaviour
+using BeardedManStudios.Forge.Networking.Generated;
+public class SpaceShipControl : PlayerMovementBehavior
 {
     private Vector3 targetPosition;
     private Vector3 currTargetPosition;
@@ -12,7 +12,7 @@ public class SpaceShipControl : MonoBehaviour
     private Queue<GameObject> targetsCircles = new Queue<GameObject>();
     private int movementMode = 3;
     private float speed = 5f;
-    private bool isThisObjectSelected = false;
+    private bool isThisObjectSelected = true;
     private SpriteRenderer spriteRendererForSelection;
 
     public GameObject targetCirclePrefab;
@@ -127,17 +127,18 @@ public class SpaceShipControl : MonoBehaviour
             movementMode = 3;
         }
 
-        
+
     }
 
     private void Start()
     {
+        Screen.SetResolution(800, 450, false);
         Debug.Log("New code 2");
         targetPosition = transform.position;
         currTargetPosition = transform.position;
 
     }
-
+    
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log(col.gameObject.name + " : " + gameObject.name + " : " + Time.time);
@@ -173,6 +174,14 @@ public class SpaceShipControl : MonoBehaviour
 
     void Update()
     {
+        if (!networkObject.IsServer)
+        {
+            transform.position = networkObject.position;
+            transform.rotation = networkObject.rotation;
+            return;
+        }
+        
+
         HandleIsSelected();
 
         if (isThisObjectSelected)
@@ -203,7 +212,8 @@ public class SpaceShipControl : MonoBehaviour
 
             }
         }
-        
+        networkObject.position = transform.position;
+        networkObject.rotation = transform.rotation;
 
     }
 }
