@@ -175,8 +175,8 @@ public class SpaceShipControl : MonoBehaviour
     {
         HandleIsSelected();
 
-        if (isThisObjectSelected)
-        {
+        //if (isThisObjectSelected)
+        //{
             HandleMovementMode();
 
             switch (movementMode)
@@ -202,7 +202,7 @@ public class SpaceShipControl : MonoBehaviour
                     }
 
             }
-        }
+        //}
         
 
     }
