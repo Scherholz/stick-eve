@@ -2,6 +2,9 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+/2019Build/
+/StickEveUnity2019/Assets/ParrelSync/
+
 /StickEve/[Ll]ibrary/
 /StickEve/[Tt]emp/
 /StickEve/[Oo]bj/
@@ -104,3 +107,8 @@
 
 /StickEveUnity2019/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /StickEveUnity2019/[Aa]ssets/[Ss]treamingAssets/aa/*
+/StickEveUnity2019/Assets/ParrelSync.meta
+
+/StickEveUnity2019/Assets/Logs.meta
+/StickEveUnity2019/Assets/Logs/
+/StickEveUnity2019_clone_0/
