@@ -16,6 +16,7 @@ public class SpaceShipControl : PlayerMovementBehavior
     private SpriteRenderer spriteRendererForSelection;
 
     public GameObject targetCirclePrefab;
+    public float TurnSpeed = 5f;
     void HandleMovement1()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -176,8 +177,10 @@ public class SpaceShipControl : PlayerMovementBehavior
     {
         if (!networkObject.IsServer)
         {
-            transform.position = networkObject.position;
-            transform.rotation = networkObject.rotation;
+           // transform.position = networkObject.position;
+            transform.position = Vector2.MoveTowards(transform.position, networkObject.position, Time.deltaTime * 5);
+            //transform.rotation = networkObject.rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, networkObject.rotation, Time.fixedDeltaTime * TurnSpeed);
             return;
         }
         
