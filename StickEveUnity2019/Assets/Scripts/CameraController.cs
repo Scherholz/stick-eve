@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
-    private bool cameraFollowPlayerFlag;
+    private bool cameraFollowPlayerFlag = true;
     private float ScrollSpeed = 15f;
     public float dampTime = 0.15f;
     private Vector3 velocity = Vector3.zero;
@@ -15,8 +15,9 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraFollowPlayerFlag = false;
+        cameraFollowPlayerFlag = true;
         textCameraMode.text = "RTS";
+        
     }
 
     void HandleCameraMode()
@@ -62,6 +63,14 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!objectToFollow)
+        {
+            if (GameObject.FindGameObjectWithTag("PlayerSpaceShip"))
+            {
+                objectToFollow = GameObject.FindGameObjectWithTag("PlayerSpaceShip").GetComponent<Transform>();
+            }
+            
+        }
         HandleCameraMode();
         /// TO-DO : make camera child to player
         if (cameraFollowPlayerFlag)

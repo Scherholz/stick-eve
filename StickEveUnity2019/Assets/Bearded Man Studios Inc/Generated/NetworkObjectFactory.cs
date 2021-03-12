@@ -43,6 +43,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 						availableCallback = true;
 						obj = new PlayerMovementNetworkObject(networker, id, frame);
 						break;
+					case RealTimeCombatNetworkManagerNetworkObject.IDENTITY:
+						availableCallback = true;
+						obj = new RealTimeCombatNetworkManagerNetworkObject(networker, id, frame);
+						break;
 					case TestNetworkObject.IDENTITY:
 						availableCallback = true;
 						obj = new TestNetworkObject(networker, id, frame);

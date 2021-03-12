@@ -4,15 +4,12 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"Vector3\"][\"Vector3\"][\"Quaternion\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"currTargetPosition\"][\"position\"][\"rotation\"]]")]
-	public abstract partial class PlayerMovementBehavior : NetworkBehavior
+	[GeneratedRPC("{\"types\":[]")]
+	[GeneratedRPCVariableNames("{\"types\":[]")]
+	public abstract partial class RealTimeCombatNetworkManagerBehavior : NetworkBehavior
 	{
-		public const byte RPC_SET_CURR_TARGET_POSITION = 0 + 5;
-		public const byte RPC_SET_NET_WORK_OBJ_POSITION = 1 + 5;
-		public const byte RPC_SET_NET_WORK_OBJ_ROTATION = 2 + 5;
 		
-		public PlayerMovementNetworkObject networkObject = null;
+		public RealTimeCombatNetworkManagerNetworkObject networkObject = null;
 
 		public override void Initialize(NetworkObject obj)
 		{
@@ -20,13 +17,10 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			if (networkObject != null && networkObject.AttachedBehavior != null)
 				return;
 			
-			networkObject = (PlayerMovementNetworkObject)obj;
+			networkObject = (RealTimeCombatNetworkManagerNetworkObject)obj;
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("setCurrTargetPosition", setCurrTargetPosition, typeof(Vector3));
-			networkObject.RegisterRpc("setNetWorkObjPosition", setNetWorkObjPosition, typeof(Vector3));
-			networkObject.RegisterRpc("setNetWorkObjRotation", setNetWorkObjRotation, typeof(Quaternion));
 
 			networkObject.onDestroy += DestroyGameObject;
 
@@ -84,7 +78,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		public override void Initialize(NetWorker networker, byte[] metadata = null)
 		{
-			Initialize(new PlayerMovementNetworkObject(networker, createCode: TempAttachCode, metadata: metadata));
+			Initialize(new RealTimeCombatNetworkManagerNetworkObject(networker, createCode: TempAttachCode, metadata: metadata));
 		}
 
 		private void DestroyGameObject(NetWorker sender)
@@ -95,7 +89,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		public override NetworkObject CreateNetworkObject(NetWorker networker, int createCode, byte[] metadata = null)
 		{
-			return new PlayerMovementNetworkObject(networker, this, createCode, metadata);
+			return new RealTimeCombatNetworkManagerNetworkObject(networker, this, createCode, metadata);
 		}
 
 		protected override void InitializedTransform()
@@ -103,21 +97,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.SnapInterpolations();
 		}
 
-		/// <summary>
-		/// Arguments:
-		/// Vector3 currTargetPosition
-		/// </summary>
-		public abstract void setCurrTargetPosition(RpcArgs args);
-		/// <summary>
-		/// Arguments:
-		/// Vector3 position
-		/// </summary>
-		public abstract void setNetWorkObjPosition(RpcArgs args);
-		/// <summary>
-		/// Arguments:
-		/// Quaternion rotation
-		/// </summary>
-		public abstract void setNetWorkObjRotation(RpcArgs args);
 
 		// DO NOT TOUCH, THIS GETS GENERATED PLEASE EXTEND THIS CLASS IF YOU WISH TO HAVE CUSTOM CODE ADDITIONS
 	}

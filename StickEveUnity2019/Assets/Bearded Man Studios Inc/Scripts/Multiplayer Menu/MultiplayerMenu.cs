@@ -61,6 +61,12 @@ public class MultiplayerMenu : MonoBehaviour
 			NetWorker.localServerLocated += LocalServerLocated;
 			NetWorker.RefreshLocalUdpListings(ushort.Parse(portNumber.text));
 		}
+
+#if UNITY_SERVER
+		Application.targetFrameRate = 60;
+		Host();
+#endif
+
 	}
 
 	private void LocalServerLocated(NetWorker.BroadcastEndpoints endpoint, NetWorker sender)
