@@ -52,5 +52,6 @@ MonoBehaviour:
   - {fileID: 139536, guid: 661f29f0c0c86fa47b6015bd602d0ac6, type: 3}
   PlayerMovementNetworkObject:
   - {fileID: 6570939093590068317, guid: d9930df0d7d009947b44c688e6a2b608, type: 3}
+  RealTimeCombatNetworkManagerNetworkObject: []
   TestNetworkObject: []
   automaticScenes: 1
